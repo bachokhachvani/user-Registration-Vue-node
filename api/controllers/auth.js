@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import { createError } from "../utils/error.js";
 import bcrypt from "bcryptjs";
-import { Jwt } from "jsonwebtoken";
+import Jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
   const salt = bcrypt.genSaltSync(10);
@@ -28,7 +28,7 @@ export const signin = async (req, res, next) => {
       return next(createError(401, "password is incorrect!"));
     }
 
-    const token = jwt.sign(
+    const token = Jwt.sign(
       {
         id: user._id,
         firstName: user.firstName,
@@ -41,7 +41,21 @@ export const signin = async (req, res, next) => {
     );
 
     const { password, ...other } = user._doc;
-    await res.status(200).json({ ...other });
+    await res
+      .cookie("access_token", token, {
+        http: true,
+      })
+      .status(200)
+      .json({ ...other });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const getUser = (req, res, next) => {
+  try {
+    const { iat, exp, ...others } = req.user;
+    res.status(200).json({ ...others });
   } catch (e) {
     next(e);
   }
