@@ -24,3 +24,13 @@ export const updateUser = async (req, res, next) => {
     next(e);
   }
 };
+
+export const deleteUser = async (req, res, next) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.userId);
+    await res.clearCookie("access_token");
+    await res.status(200).json(deleteUser);
+  } catch (e) {
+    next(e);
+  }
+};
