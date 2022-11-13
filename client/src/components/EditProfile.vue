@@ -39,11 +39,15 @@ export default {
         lastName: this.user.lastName,
       };
 
-      const response = await axios.put("users/" + this.user.id, data, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      const response = await axios.put(
+        "users/" + localStorage.getItem("data"),
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
       this.user = response.data;
       console.log("asd", response);
     },
@@ -59,12 +63,6 @@ export default {
   async created() {
     this.getData();
   },
-
-  //   async updated() {
-  //     const response = await axios.get("auth/me");
-  //     console.log("asd");
-  //     this.user = response.data;
-  //   },
 };
 </script>
 

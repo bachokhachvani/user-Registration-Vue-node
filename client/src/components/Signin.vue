@@ -40,7 +40,7 @@ export default {
       console.log(data);
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("data", response.data);
+      localStorage.setItem("data", response.data._id);
     },
   },
 };

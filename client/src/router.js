@@ -14,7 +14,7 @@ export default new Router({
     { path: "/", component: SignupComponent },
     { path: "/signin", component: SigninComponent },
     { path: "/profile", component: ProfileComponent },
-    { path: "/editprofile", component: EditProfileComponent },
-    { path: "/deleteprofile", component: DeleteProfileComponent },
+    { path: "/profile/:userId/edit", component: EditProfileComponent },
+    { path: "/profile/:userId/delete", component: DeleteProfileComponent },
   ],
 });

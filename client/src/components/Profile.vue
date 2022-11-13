@@ -7,6 +7,7 @@
       <p>{{ user.birthday }}</p>
       <p>{{ user.password }}</p>
       <div><button @click="clickHandler">edit profile</button></div>
+      <div><button @click="deleteHandler">delete profile</button></div>
     </div>
     <div v-if="!user"><p>Error something went wrong</p></div>
   </div>
@@ -32,7 +33,10 @@ export default {
   },
   methods: {
     clickHandler() {
-      this.$router.push("/editprofile");
+      this.$router.push("/profile/" + localStorage.getItem("data") + "/edit");
+    },
+    deleteHandler() {
+      this.$router.push("/profile/" + localStorage.getItem("data") + "/delete");
     },
   },
 };

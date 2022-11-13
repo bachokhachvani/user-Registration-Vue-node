@@ -29,7 +29,7 @@ export const deleteUser = async (req, res, next) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.userId);
     await res.clearCookie("access_token");
-    await res.status(200).json(deleteUser);
+    await res.status(200).json(deletedUser);
   } catch (e) {
     next(e);
   }
