@@ -46,7 +46,7 @@ export const signin = async (req, res, next) => {
         http: true,
       })
       .status(200)
-      .json({ ...other });
+      .json({ ...other, token });
   } catch (e) {
     next(e);
   }

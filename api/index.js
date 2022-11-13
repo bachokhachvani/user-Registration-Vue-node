@@ -4,8 +4,10 @@ import mongoose from "mongoose";
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 dotenv.config();
 const connect = async () => {
