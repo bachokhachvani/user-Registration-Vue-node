@@ -2,7 +2,9 @@ import jwt from "jsonwebtoken";
 import { createError } from "./error.js";
 
 export const verifyToken = (req, res, next) => {
-  const token = req.cookies.access_token;
+  // const token = req.cookies.access_token;
+  const token = req.headers.authorization.replace("Bearer ", "");
+
   if (!token) {
     return next(createError(401, "You are not authenticated!"));
   }
@@ -12,6 +14,7 @@ export const verifyToken = (req, res, next) => {
       return next(createError(401, "Token is not valid!"));
     }
     req.user = user;
+
     next();
   });
 };

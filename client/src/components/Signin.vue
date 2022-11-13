@@ -34,8 +34,13 @@ export default {
       const response = await axios.post("auth/sign-in", data).catch((e) => {
         console.log(e);
       });
+      if (response) {
+        this.$router.push("/profile");
+      }
+      console.log(data);
 
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("data", response.data);
     },
   },
 };

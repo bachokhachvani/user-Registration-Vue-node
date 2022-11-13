@@ -55,6 +55,7 @@ export const signin = async (req, res, next) => {
 export const getUser = (req, res, next) => {
   try {
     const { iat, exp, ...others } = req.user;
+
     res.status(200).json({ ...others });
   } catch (e) {
     next(e);
