@@ -41,6 +41,7 @@ export default {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("data", response.data._id);
+      localStorage.setItem("userData", JSON.stringify(response.data));
     },
   },
 };

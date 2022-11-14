@@ -39,6 +39,10 @@ export default {
       this.$router.push("/profile/" + localStorage.getItem("data") + "/delete");
     },
   },
+  beforeCreate() {
+    this.$store.commit("auth/initialiseStore");
+    console.log("sadaasdasdas", this.$store.state);
+  },
 };
 </script>
 
