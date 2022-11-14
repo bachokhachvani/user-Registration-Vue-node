@@ -1,8 +1,11 @@
 <template>
   <div>
-    <h3>Do you really want to delete account?</h3>
-    <button class="deleteBtn" @click="deleteAccountHandler">Delete</button>
-    <button class="noBtn" @click="noHandler">No</button>
+    <div v-if="isUser()">
+      <h3>Do you really want to delete account?</h3>
+      <button class="deleteBtn" @click="deleteAccountHandler">Delete</button>
+      <button class="noBtn" @click="noHandler">No</button>
+    </div>
+    <div v-if="!isUser()"><h3>Access denied!</h3></div>
   </div>
 </template>
 
@@ -15,6 +18,15 @@ export default {
     return { id: this.$route.params.userId };
   },
   methods: {
+    //blocking the route for different user
+    isUser() {
+      if (this.id === JSON.parse(localStorage.getItem("userData"))._id) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     async deleteAccountHandler() {
       const response = await axios.delete("users/" + this.id, {
         headers: {
@@ -23,6 +35,7 @@ export default {
       });
 
       console.log(response);
+      localStorage.clear();
       this.$router.push("/");
     },
     noHandler() {
