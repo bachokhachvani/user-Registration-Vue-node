@@ -45,7 +45,6 @@ export default {
         return false;
       }
     },
-
     clickHandler() {
       this.$router.push("/profile");
     },
@@ -65,8 +64,11 @@ export default {
         }
       );
       this.user = response.data;
-
+      console.log(response);
       localStorage.setItem("userData", JSON.stringify(response.data));
+      if (response.status === 200) {
+        alert("Submitted successfully!");
+      }
     },
     async getData() {
       const response = await axios.get("auth/me", {
