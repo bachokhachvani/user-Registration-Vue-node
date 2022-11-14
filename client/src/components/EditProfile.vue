@@ -67,8 +67,6 @@ export default {
       this.user = response.data;
 
       localStorage.setItem("userData", JSON.stringify(response.data));
-      console.log("store", this.$store.state);
-      console.log("asd", response);
     },
     async getData() {
       const response = await axios.get("auth/me", {
@@ -81,7 +79,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("auth/initialiseStore");
-    console.log("sadaasdasdas", this.$store.state);
   },
 };
 </script>
