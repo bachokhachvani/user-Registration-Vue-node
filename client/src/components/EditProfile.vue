@@ -1,22 +1,24 @@
 <template>
   <div>
-    <div v-if="isUser()">
-      <form @submit.prevent="submitHandler">
-        <div>
+    <div class="edit-container" v-if="isUser()">
+      <form class="edit-form" @submit.prevent="submitHandler">
+        <h3>Edit Profile</h3>
+        <div class="input-wrapper">
           <input type="text" v-model="user.firstName" />
         </div>
-        <div>
+        <div class="input-wrapper">
           <input type="text" v-model="user.lastName" />
         </div>
-        <div>
+        <div class="input-wrapper">
           <input type="text" :placeholder="user.email" disabled />
         </div>
-        <div>
+        <div class="input-wrapper">
           <input type="text" :placeholder="user.birthday" disabled />
         </div>
-        <div><p>Error something went wrong</p></div>
-        <button>submit</button>
-        <button @click="clickHandler">back to profile</button>
+        <div class="editBtn-container">
+          <button>submit</button>
+          <button @click="clickHandler">back to profile</button>
+        </div>
       </form>
     </div>
     <div v-if="!isUser()">Access denied</div>
@@ -84,4 +86,21 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 8%;
+}
+.editBtn-container {
+  display: flex;
+  gap: 10px;
+  button {
+    cursor: pointer;
+    border-radius: 8px;
+    border-width: 1px;
+  }
+}
+</style>
